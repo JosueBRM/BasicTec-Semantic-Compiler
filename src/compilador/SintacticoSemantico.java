@@ -252,7 +252,7 @@ public class SintacticoSemantico {
                     cmp.ts.anadeTipo( id.entrada, tipo.tipo );
                     
                     // Declaracion
-                    if ( !listaDeclaracionesPrima.tipo.equals( ERROR_TIPO ) ) {
+                    if ( listaDeclaracionesPrima.tipo.equals( VACIO ) ) {
                         lista_dec.tipo = tipo.tipo;
                         
                     // Concatenacion con 'x'
