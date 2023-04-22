@@ -1145,8 +1145,9 @@ public class SintacticoSemantico {
     }
     
 public String getArgumentos(String tipo){
-        String [] argumentos = tipo.split("x");
-        return argumentos[0];
+        //String [] argumentos = tipo.split("x");
+        //return argumentos[0];
+        return tipo.toString();
 }
     
 }
