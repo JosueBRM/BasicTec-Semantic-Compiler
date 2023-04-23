@@ -587,18 +587,27 @@ public class SintacticoSemantico {
             
 // ----------------------------------{ 20 }---------------------------------------
             if ( analizarSemantica ) {
-                if ( cmp.ts.buscaTipo( id.entrada ).equals ( expresion.tipo ))
-                    proposicion.tipo = VACIO;
-                
-                else if(cmp.ts.buscaTipo(id.entrada).equals("SINGLE") 
-                         && expresion.tipo.equals("INTEGER"))
-                    proposicion.tipo = VACIO;
-                else {
-                    proposicion.tipo = ERROR_TIPO;
-                    cmp.me.error( cmp.ERR_SEMANTICO,
-                            "{20} : Tipo y expresion no concuerdan" );
-                }
+                //Primero va y revisa la TS, si no encuentra el id, entonces no
+                //esta declarado aun
+                if(!cmp.ts.buscaTipo(id.entrada).isEmpty()){
                     
+                    if ( cmp.ts.buscaTipo( id.entrada ).equals ( expresion.tipo ))
+                        proposicion.tipo = VACIO;
+
+                    else if(cmp.ts.buscaTipo(id.entrada).equals("SINGLE") 
+                             && expresion.tipo.equals("INTEGER"))
+                        proposicion.tipo = VACIO;
+                    else {
+                        proposicion.tipo = ERROR_TIPO;
+                        cmp.me.error( cmp.ERR_SEMANTICO,
+                                "{20} : ERROR, El tipo de la variable y expresion no concuerdan" 
+                                + "Linea No." + cmp.be.preAnalisis.numLinea);
+                    }
+                }else{
+                    cmp.me.error( cmp.ERR_SEMANTICO,
+                                "{20} : ERROR, La variable no esta declarada " 
+                                + "Linea No." + cmp.be.preAnalisis.numLinea);
+                }   
             }
             // -----------------------------------------------------------------
             
@@ -613,7 +622,8 @@ public class SintacticoSemantico {
             
 // ----------------------------------{ 21 }---------------------------------------
             if ( analizarSemantica ) {
-                if ( propPrima.tipo.equals( getDomain ( cmp.ts.buscaTipo( id.entrada ) ) ) ) 
+                if ( propPrima.tipo.equals( getDomain (
+                                        cmp.ts.buscaTipo( id.entrada )))) 
                     proposicion.tipo = VACIO;
                 else {
                     proposicion.tipo = ERROR_TIPO;
