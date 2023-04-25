@@ -718,9 +718,8 @@ public class SintacticoSemantico {
             
         } else if ( analizarSemantica ) 
                 propPrim.tipo = "VOID";
-            // -> empty {25}
+            // -> empty {24}
             
-// ----------------------------------{ 25 }-------------------------------------
     }
     
     private void listaExpresiones ( Atributo le ) {
@@ -738,7 +737,7 @@ public class SintacticoSemantico {
             listaExpresionesPrima ( lista_expresiones_prima );
             
             
-// ----------------------------------{ 26 }-------------------------------------
+// ----------------------------------{ 25 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( !expresion.tipo.equals( ERROR_TIPO ) 
                         && !lista_expresiones_prima.tipo.equals( 
@@ -750,15 +749,15 @@ public class SintacticoSemantico {
                 else {
                     le.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO,
-                      "{26} : ERROR en lista de expresiones" );
+                      "{25} : ERROR en lista de expresiones" );
                 }
             }
             // -----------------------------------------------------------------
             
         } else {
-            // lista_expresiones -> empty {27}
+            // lista_expresiones -> empty {26}
             
-// ----------------------------------{ 27 }-------------------------------------
+// ----------------------------------{ 26 }-------------------------------------
             if ( analizarSemantica ) {
                 le.tipo = VACIO;
             }
@@ -772,12 +771,12 @@ public class SintacticoSemantico {
         Atributo lista_expresiones_prima1 = new Atributo ();
         
         if ( ",".equals(preAnalisis) ) {
-            // lista_expresiones_prima -> , expresion lista_expresiones_prima {28}
+            // lista_expresiones_prima -> , expresion lista_expresiones_prima {27}
             emparejar ( "," );
             expresion ( expresion );
             listaExpresionesPrima ( lista_expresiones_prima1 );
             
-// ----------------------------------{ 28 }-------------------------------------
+// ----------------------------------{ 27 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( !expresion.tipo.equals( ERROR_TIPO ) 
                         && !lista_expresiones_prima1.tipo.equals(
@@ -790,13 +789,13 @@ public class SintacticoSemantico {
                 else {
                     listaEP.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                      "{28} : ERROR en la Expresión" );
+                      "{27} : ERROR en la Expresión" );
                 }
             }
         } else {
-            // lista_expresiones_prima -> empty {29}
+            // lista_expresiones_prima -> empty {28}
             
-// ----------------------------------{ 29 }-------------------------------------
+// ----------------------------------{ 28 }-------------------------------------
             if ( analizarSemantica ) {
                 listaEP.tipo = VACIO;
             }
@@ -815,13 +814,13 @@ public class SintacticoSemantico {
                     preAnalisis.equals ( "num.num" )   ||
                         preAnalisis.equals ( "(" ) ||
                             preAnalisis.equals ( "literal" )) {
-            // condicion -> expresion oprel expresion {30}
+            // condicion -> expresion oprel expresion {29}
             expresion ( expr1 );
             emparejar ( "oprel" );
             expresion ( expr2 );
             
             
-// ----------------------------------{ 30 }-------------------------------------
+// ----------------------------------{ 29 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( expr1.tipo.equals( expr2.tipo ) ) {
                     condicion.tipo = "BOOLEAN";
@@ -835,7 +834,7 @@ public class SintacticoSemantico {
                 } else {
                     condicion.tipo = "ERROR_TIPO";
                     cmp.me.error( cmp.ERR_SEMANTICO,
-                      "{21} : Las expresiones no concuerdan" );
+                      "{29} : Las expresiones no concuerdan" );
                 }
             }
             
@@ -857,17 +856,17 @@ public class SintacticoSemantico {
                 preAnalisis.equals ( "num" )       ||
                     preAnalisis.equals ( "num.num" )   ||
                         preAnalisis.equals ( "(" ) ) {
-            // expresion -> termino {31} expresion_prima {32}
+            // expresion -> termino {30} expresion_prima {31}
             termino ( termino );
             
             
-// ----------------------------------{ 31 }-------------------------------------
+// ----------------------------------{ 30 }-------------------------------------
             if ( analizarSemantica ) 
                 exprPrima.h = termino.tipo;
             
             expresionPrima ( exprPrima );
             
-// ----------------------------------{ 32 }-------------------------------------
+// ----------------------------------{ 31 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( !exprPrima.h.equals( ERROR_TIPO ) && 
                         !exprPrima.tipo.equals( ERROR_TIPO ) )
@@ -875,16 +874,16 @@ public class SintacticoSemantico {
                 else {
                     expresion.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO,
-                      "{32} : ERROR de Tipos" );
+                      "{31} : ERROR de Tipos" );
                 }
             }
 // -----------------------------------------------------------------------------
             
         } else if ( "literal".equals(preAnalisis) ) {
-            // expresion -> literal {33}
+            // expresion -> literal {32}
             emparejar ( "literal" );
             
-// ----------------------------------{ 33 }-------------------------------------
+// ----------------------------------{ 32 }-------------------------------------
             if ( analizarSemantica ) {
                 expresion.tipo = "STRING";
             }
@@ -905,12 +904,12 @@ public class SintacticoSemantico {
         Atributo ePrim_1 = new Atributo ();
         
         if ( preAnalisis.equals ( "opsuma" ) ) {
-            // expresion_prima -> opsuma termino {34} expresion_prima {35}
+            // expresion_prima -> opsuma termino {33} expresion_prima {34}
             emparejar ( "opsuma" );
             termino ( termino );
             
             
-// ----------------------------------{ 34 }-------------------------------------
+// ----------------------------------{ 33 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( expresion_prima.h.equals( termino.tipo ) )
                     ePrim_1.h = termino.tipo;
@@ -922,14 +921,14 @@ public class SintacticoSemantico {
                 else {
                     ePrim_1.h = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                      "{34} : ERROR de Expresion" );
+                      "{33} : ERROR de Expresion" );
                 }
             }
 // -----------------------------------------------------------------------------
             
             expresionPrima ( ePrim_1 ); 
             
-// ----------------------------------{ 35 }-------------------------------------
+// ----------------------------------{ 34 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( !ePrim_1.h.equals( ERROR_TIPO ) && 
                         !ePrim_1.tipo.equals( ERROR_TIPO ) )
@@ -937,15 +936,15 @@ public class SintacticoSemantico {
                 else {
                     expresion_prima.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                      "{35} : ERROR de Expresion_prima" );
+                      "{34} : ERROR de Expresion_prima" );
                 }
             }
 // -----------------------------------------------------------------------------
             
         } else {
-            // expresion_prima -> empty {36}            
+            // expresion_prima -> empty {35}            
             
-// ----------------------------------{ 36 }-------------------------------------
+// ----------------------------------{ 35 }-------------------------------------
             if ( analizarSemantica ) {
                 expresion_prima.tipo = expresion_prima.h;
             }
@@ -965,11 +964,10 @@ public class SintacticoSemantico {
                 preAnalisis.equals ( "num" )       ||
                     preAnalisis.equals ( "num.num" )   ||
                         preAnalisis.equals ( "(" ) ) {
-            // termino -> factor {37} termino_prima {38}
             factor ( factor );
             
             
-// ----------------------------------{ 37 }-------------------------------------
+// ----------------------------------{ 36 }-------------------------------------
             if ( analizarSemantica ) {
                 termino_prima.h = factor.tipo;
             }
@@ -977,7 +975,7 @@ public class SintacticoSemantico {
             
             terminoPrimo ( termino_prima );
             
-// ----------------------------------{ 38 }-------------------------------------
+// ----------------------------------{ 37 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( !termino_prima.h.equals( ERROR_TIPO ) &&
                      !termino_prima.tipo.equals( ERROR_TIPO ) ) 
@@ -985,7 +983,7 @@ public class SintacticoSemantico {
                 else {
                     termino.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                      "{38} : ERROR de Tipos" );
+                      "{37} : ERROR de Tipos" );
                 }
             }
             // -----------------------------------------------------------------
@@ -1004,12 +1002,11 @@ public class SintacticoSemantico {
         Atributo tp_1 = new Atributo ();
         
         if ( "opmult".equals(preAnalisis) ) {
-            // termino_prima -> opmult factor {39} termino_prima {40}
             emparejar ( "opmult" );
             factor ( factor );
             
             
-// ----------------------------------{ 39 }---------------------------------------
+// ----------------------------------{ 38 }---------------------------------------
             if ( analizarSemantica ) {
                 if ( terminoPrimo.h.equals( factor.tipo ) ) {
                     tp_1.h = factor.tipo;
@@ -1026,14 +1023,14 @@ public class SintacticoSemantico {
                 else {
                     tp_1.h = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                            "{39} : Error de tipo" );
+                            "{38} : Error de tipo" );
                 }
             }
 // -----------------------------------------------------------------
             
             terminoPrimo ( tp_1 );            
             
-// ----------------------------------{ 40 }-------------------------------------
+// ----------------------------------{ 39 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( !tp_1.h.equals( ERROR_TIPO ) && 
                         !tp_1.tipo.equals( ERROR_TIPO ) )
@@ -1041,15 +1038,15 @@ public class SintacticoSemantico {
                 else {
                     terminoPrimo.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO,
-                            "{40} : ERROR de Tipos" );
+                            "{39} : ERROR de Tipos" );
                 }
             }
             // -----------------------------------------------------------------
             
         } else {
-            // termino -> empty {41}
+            // termino -> empty {40}
             
-// ----------------------------------{ 41 }-------------------------------------
+// ----------------------------------{ 40 }-------------------------------------
             if ( analizarSemantica ) {
                 terminoPrimo.tipo = terminoPrimo.h;
             }
@@ -1065,7 +1062,7 @@ public class SintacticoSemantico {
         Atributo expresion = new Atributo ();
         
         if ( "id".equals(preAnalisis) ) {
-            // factor -> id factor_prima {42}
+            // factor -> id factor_prima {41}
             
             id = cmp.be.preAnalisis;
             
@@ -1073,7 +1070,7 @@ public class SintacticoSemantico {
             factorPrimo ( fp );
             
             
-// ----------------------------------{ 42 }-------------------------------------
+// ----------------------------------{ 41 }-------------------------------------
             if ( analizarSemantica ) {
                 if ( fp.tipo.equals( VACIO ) ) {
                     factor.tipo = cmp.ts.buscaTipo( id.entrada );
@@ -1083,40 +1080,40 @@ public class SintacticoSemantico {
                 else {
                     factor.tipo = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                      "{42} : ERROR de Tipos" );
+                      "{41} : ERROR de Tipos" );
                 }
             }
             // -----------------------------------------------------------------
             
         } else if ( "num".equals(preAnalisis)) {
-            // factor -> num {43}
+            // factor -> num {42}
             emparejar ( "num" );
             
             
-// ----------------------------------{ 43 }-------------------------------------
+// ----------------------------------{ 42 }-------------------------------------
             if ( analizarSemantica ) 
                 factor.tipo = "INTEGER";
 // -----------------------------------------------------------------------------
             
         } else if ( "num.num".equals(preAnalisis) ) {
-            // factor -> num.num {44}
+            // factor -> num.num {43}
             emparejar ( "num.num" );
             
             
-// ----------------------------------{ 44 }-------------------------------------
+// ----------------------------------{ 43 }-------------------------------------
             if ( analizarSemantica ) {
                 factor.tipo = "SINGLE";
             }
             // -----------------------------------------------------------------
             
         } else if ( preAnalisis.equals ( "(" ) ) {
-            // factor -> ( expresion ) {45}
+            // factor -> ( expresion ) {44}
             emparejar ( "(" );
             expresion ( expresion );
             emparejar ( ")" );
             
             
-// ----------------------------------{ 45 }-------------------------------------
+// ----------------------------------{ 44 }-------------------------------------
             if ( analizarSemantica ) {
                 factor.tipo = expresion.tipo;
             }
@@ -1136,22 +1133,22 @@ public class SintacticoSemantico {
         Atributo le = new Atributo ();
         
         if ( preAnalisis.equals( "(" ) ) {
-            // factor_prima -> ( lista_expresiones ) {46}
+            // factor_prima -> ( lista_expresiones ) {45}
             emparejar ( "(" );
             listaExpresiones ( le );
             emparejar ( ")" );
             
             
-// ----------------------------------{ 46 }-------------------------------------
+// ----------------------------------{ 45 }-------------------------------------
             if ( analizarSemantica ) {
                 factorPrimo.tipo = le.tipo;
             }
             
         } else {
-            // factor_prima -> empty {47}
+            // factor_prima -> empty {46}
             
             
-// ----------------------------------{ 47 }-------------------------------------
+// ----------------------------------{ 46 }-------------------------------------
             if ( analizarSemantica ) {
                 factorPrimo.tipo = VACIO;
             }
