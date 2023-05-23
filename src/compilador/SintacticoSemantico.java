@@ -727,6 +727,7 @@ public class SintacticoSemantico {
         Atributo expresion = new Atributo ();
         Atributo lista_expresiones_prima = new Atributo ();
         
+        
         if ( preAnalisis.equals ( "id" ) || 
                 preAnalisis.equals ( "num" ) ||  
                     preAnalisis.equals ( "num.num" ) || 
@@ -742,9 +743,9 @@ public class SintacticoSemantico {
                 if ( !expresion.tipo.equals( ERROR_TIPO ) 
                         && !lista_expresiones_prima.tipo.equals( 
                                                             ERROR_TIPO ))
-                    if ( lista_expresiones_prima.tipo.equals( VACIO ))
+                    if ( lista_expresiones_prima.tipo.equals( VACIO )){
                         le.tipo = expresion.tipo;
-                    else
+                    }else
                         le.tipo = expresion.tipo + "x" + lista_expresiones_prima.tipo;
                 else {
                     le.tipo = ERROR_TIPO;
@@ -1023,7 +1024,7 @@ public class SintacticoSemantico {
                 else {
                     tp_1.h = ERROR_TIPO;
                     cmp.me.error( cmp.ERR_SEMANTICO, 
-                            "{38} : Error de tipo" );
+                            "{38} : ERROR. Tipos de datos incorrectos" );
                 }
             }
 // -----------------------------------------------------------------
@@ -1141,7 +1142,10 @@ public class SintacticoSemantico {
             
 // ----------------------------------{ 45 }-------------------------------------
             if ( analizarSemantica ) {
+                //Add validacion de que la lista de expresiones adentro del argumento
+                //de una funcion coincidan con los argumentos declarados
                 factorPrimo.tipo = le.tipo;
+                
             }
             
         } else {
